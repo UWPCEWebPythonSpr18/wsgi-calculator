@@ -41,7 +41,14 @@ To submit your homework:
 
 
 """
-
+def home_page():
+    <h1>{title}</h1>
+    <table>
+      <tr><th>Author</th><td>{author}</td></tr>
+      <tr><th>Publisher</th><td>{publisher}</td></tr>
+      <tr><th>ISBN</th><td>{isbn}</td></tr>
+    </table>
+    <a href="/">Back to the list</a>
 
 def add(*args):
     """ Returns a STRING with the sum of the arguments """
@@ -55,6 +62,8 @@ def add(*args):
 # TODO: Add functions for handling more arithmetic operations.
 
 def resolve_path(path):
+  func, arg1, arg2 = path.split('/')
+  
     """
     Should return two values: a callable and an iterable of
     arguments.
@@ -64,6 +73,12 @@ def resolve_path(path):
     # examples provide the correct *syntax*, but you should
     # determine the actual values of func and args using the
     # path.
+
+    try:
+
+    except NameError:
+      print("Please select an appropriate function.")
+
     func = add
     args = ['25', '32']
 
