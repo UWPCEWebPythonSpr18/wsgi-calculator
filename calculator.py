@@ -56,14 +56,32 @@ def add(*args):
     # TODO: Fill sum with the correct value, based on the
     # args provided.
     sum = "0"
+    output = args[0] + args[1]
+    return str.output
 
-    return sum
+
+def subtract(*args):
+    output = args[0] - args[1]
+    return str.output
+
+
+def multiply(*args):
+    output = args[0] * args[1]
+    return str.output
+
+
+def divide(*args):
+    if (args[1] == 0):
+        print("Undefined!!! You tried to divide by zero!")
+        break
+    else:
+        output = args[0] / args[1]
+    return str.output
 
 # TODO: Add functions for handling more arithmetic operations.
 
 def resolve_path(path):
-  func, arg1, arg2 = path.split('/')
-  
+    funcname, arg1, arg2 = path.split('/')
     """
     Should return two values: a callable and an iterable of
     arguments.
@@ -73,18 +91,29 @@ def resolve_path(path):
     # examples provide the correct *syntax*, but you should
     # determine the actual values of func and args using the
     # path.
+    try:
+        arg1val = int(arg1)
+        arg2val = int(arg2)
+    except ValueError:
+        print("Please enter a valid number.")
+
+
 
     try:
-
+        func = {"add": add,
+            "subtract": subtract,
+            "multiply": multiply,
+            "divide": divide}.get(funcname)
     except NameError:
-      print("Please select an appropriate function.")
+        print("Please select an appropriate function.")
 
-    func = add
-    args = ['25', '32']
+    args = [arg1val, arg2val]
 
     return func, args
 
 def application(environ, start_response):
+
+  functionoutput = func(args)
     # TODO: Your application code from the book database
     # work here as well! Remember that your application must
     # invoke start_response(status, headers) and also return
