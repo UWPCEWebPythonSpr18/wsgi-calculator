@@ -41,16 +41,6 @@ To submit your homework:
 
 
 """
-"""
-def home_page():
-    <h1>{title}</h1>
-    <table>
-      <tr><th>Author</th><td>{author}</td></tr>
-      <tr><th>Publisher</th><td>{publisher}</td></tr>
-      <tr><th>ISBN</th><td>{isbn}</td></tr>
-    </table>
-    <a href="/">Back to the list</a>
-"""
 
 def add(*args):
     output = args[0] + args[1]
