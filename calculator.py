@@ -41,6 +41,20 @@ To submit your homework:
 
 
 """
+def homepage(*args):
+    page = """
+    <head>
+        <title>AWESOME CALCULATOR</title>
+    </head>
+    <body>
+        <h1>Calculator Instructions</h1>
+        <h2>Please enter a URL containing a mathematical function and two values.</h2>
+        <h2>Such as this one shown - "http://localhost:8080/divide/22/11"</h2>
+        <h2>Functions such as "add", "subtract", "multiply" and "divide" are available.</h2>
+    </body>
+    """
+    return page
+
 
 def add(*args):
     output = args[0] + args[1]
@@ -75,32 +89,37 @@ def divide(*args):
 
 def resolve_path(path):
     print("Entered resolve_path")
-    func = {"add": add,
+    availablefuncs = {"add": add,
             "subtract": subtract,
             "multiply": multiply,
             "divide": divide}
     crackedpath = path.split('/')
-    print(crackedpath)
-    funcname = crackedpath[-3]
-    arg1 = crackedpath[-2]
-    arg2 = crackedpath[-1]
-    print("Vals: {}, {}, {}".format(funcname, arg1, arg2))
-    print("FunctionCall: {}".format(funcname))
-    try:
-        arg1val = int(arg1)
-        arg2val = int(arg2)
-        print("Vals OK")
-    except ValueError:
-        print("Please enter a valid number.")
-        return NameError
-    if funcname in func.keys():
-        print("function name found")
-        func = func.get(funcname)
+    if crackedpath[1] == '':
+        func = homepage
+        args = [0,0]
+        return func, args
     else:
-        print("Function name not found")
-        return NameError
-        print("Selected function: {}".format(funcname))
-    args = [arg1val, arg2val]
+        print(crackedpath)
+        funcname = crackedpath[-3]
+        arg1 = crackedpath[-2]
+        arg2 = crackedpath[-1]
+        print("Vals: {}, {}, {}".format(funcname, arg1, arg2))
+        print("FunctionCall: {}".format(funcname))
+        try:
+            arg1val = int(arg1)
+            arg2val = int(arg2)
+            print("Vals OK")
+        except ValueError:
+            print("Please enter a valid number.")
+            return NameError
+        if funcname in availablefuncs.keys():
+            print("function name found")
+            func = availablefuncs.get(funcname)
+        else:
+            print("Function name not found")
+            return NameError
+            print("Selected function: {}".format(funcname))
+        args = [arg1val, arg2val]
     return func, args
 
 def application(environ, start_response):
