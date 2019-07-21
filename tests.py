@@ -10,7 +10,7 @@ class WebTestCase(unittest.TestCase):
     def setUp(self):
         self.server_process = subprocess.Popen(
             [
-                "python",
+                "python3",
                 "calculator.py"
             ],
             stdout=subprocess.PIPE,
